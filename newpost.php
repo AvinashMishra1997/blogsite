@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
 			<div id="menu" >
 				<nav>
 					<ul>
-						<li><a href='adminindex.php'>profile</a></li>
+						<li><a href='userindex.php'>profile</a></li>
 						<li><a href="../index.php">Main Menu</a></li>
 						<li><a href='newpost.php'>Create New Post</a></li>
 						<li><a href='deletepost.php'>Delete Post</a></li>

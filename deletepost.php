@@ -11,6 +11,8 @@ if(!isset($_SESSION['user_id'])) {
 include "../includes/config.php";
 include "../includes/db.php";
 
+$id = $_SESSION['user_id'];
+
 if(isset($_POST['submit'])){
 	$title=$_POST['title'];
 	$category=$_POST['category'];
@@ -18,14 +20,19 @@ if(isset($_POST['submit'])){
 	$category=$db->real_escape_string($category);
 	$title=htmlentities($title);
 	$category=htmlentities($category);
-	$query="SELECT post_id FROM posts WHERE title='$title' AND category_id='$category'";
+	$query="SELECT post_id, user_id FROM posts WHERE title='$title' AND category_id='$category' ";
 	$query=$db->query($query);
 	if($query->num_rows === 1){
 		while($row = $query->fetch_object()){
 			$post_id=$row->post_id;
+			$user_id = $row->user_id;
 		}
+		if($user_id === $id){
 		$query=$db->query("DELETE FROM posts WHERE `posts`.`post_id`='$post_id'");
 		echo 'POST DELETED';
+		}else{
+			echo "POSTS rights belongs to another user";
+		}
 	}else{
 		echo 'ERROR : POST Doesn\'t Exists ';
 	}
@@ -48,7 +55,7 @@ if(isset($_POST['submit'])){
 			<div id="menu" >
 				<nav>
 					<ul>
-						<li><a href='adminindex.php'>Profile</a></li>
+						<li><a href='userindex.php'>Profile</a></li>
 						<li><a href="../index.php">Main Menu</a></li>
 						<li><a href='newpost.php'>Create New Post</a></li>
 						<li><a href='deletepost.php'>Delete Post</a></li>

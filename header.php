@@ -38,6 +38,8 @@ if($id == 1){
 				
 				<a href="index.php?category=<?php echo $row['category_id']?>"><?php echo $row['category_name']?></a>
 				<?php }}?>
+				<a href="admin/signup.php">Signup</a>
+				<a href="admin/adminlogin.php">SignIn</a>
 			</nav> 
 			<div>
 				<h1>BLOG NAME</h1>
